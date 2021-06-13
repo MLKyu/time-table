@@ -1,6 +1,5 @@
 package com.alansoft.timetableview;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -21,9 +20,13 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+
+import dagger.hilt.android.internal.managers.ViewComponentManager;
 
 public class TimetableView extends LinearLayout {
     private static final int DEFAULT_ROW_COUNT = 12;
@@ -329,11 +332,17 @@ public class TimetableView extends LinearLayout {
     }
 
     private int calCellWidth() {
-        Display display = ((Activity) context).getWindowManager().getDefaultDisplay();
+        Display display = ((AppCompatActivity) activityContext()).getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
-        int cell_w = (size.x - getPaddingLeft() - getPaddingRight() - sideCellWidth) / (columnCount - 1);
-        return cell_w;
+        return (size.x - getPaddingLeft() - getPaddingRight() - sideCellWidth) / (columnCount - 1);
+    }
+
+    private Context activityContext() {
+        final Context context = this.context;
+        if (context instanceof ViewComponentManager.FragmentContextWrapper) {
+            return ((ViewComponentManager.FragmentContextWrapper) context).getBaseContext();
+        } else return context;
     }
 
     private int calStickerHeightPx(Schedule schedule) {
