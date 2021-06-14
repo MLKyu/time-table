@@ -1,5 +1,6 @@
 package com.alansoft.timetable.ui.main
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,17 +20,18 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val repository: ServiceRepository
 ) : ViewModel() {
-    private var isLoading = MutableLiveData<Boolean>()
-    var _results: MutableLiveData<Resource<LecturesResponse>> = MutableLiveData()
+    var isLoading = MutableLiveData<Boolean>()
+    private var _results: MutableLiveData<Resource<LecturesResponse>> = MutableLiveData()
     val results: LiveData<Resource<LecturesResponse>> = _results
     var job: Job? = null
 
     fun loadLecture() {
         job?.cancel()
         job = viewModelScope.launch(Dispatchers.IO) {
-            repository.getLectures()
+            repository.getLectures(onLoading = { isLoading.postValue(it) })
                 .debounce(350)
                 .collect {
+                    Log.d("asdfasdfasdfasf", "asdfasdfasdf")
                     _results.postValue(it)
                 }
         }

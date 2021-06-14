@@ -1,5 +1,6 @@
 package com.alansoft.timetable.ba
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -7,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alansoft.timetable.data.Resource
 import com.alansoft.timetable.data.response.LecturesResponse
 import com.alansoft.timetable.extension.loadWithThumbnail
+import com.alansoft.timetable.extension.toast
+import com.alansoft.timetable.ui.main.LectureAdapter
 
 /**
  * Created by LEE MIN KYU on 2021/06/13
@@ -19,30 +22,29 @@ object BindingAdapter {
         view.loadWithThumbnail(url)
     }
 
-//    @JvmStatic
-//    @BindingAdapter("adapter")
-//    fun bindAdapter(view: RecyclerView, adapter: PageAdapter) {
-//        view.adapter = adapter
-//    }
-//
-//    @JvmStatic
-//    @BindingAdapter("lectures")
-//    fun bindLectures(view: RecyclerView, response: Resource<LecturesResponse>?) {
-//        when (response) {
-//            is Resource.Success -> {
-//                view.visibility = View.VISIBLE
-//                (view.adapter as? PageAdapter)?.submitList(response.data.items)
-//            }
-//            is Resource.Empty -> {
-//                view.visibility = View.GONE
-//                (view.adapter as? PageAdapter)?.submitList(emptyList())
-//            }
-//            is Resource.Error -> {
-//                view.visibility = View.GONE
-//                view.context?.toast(response.exception.message.toString())
-//            }
-//        }
-//    }
+    @JvmStatic
+    @BindingAdapter("adapter")
+    fun bindAdapter(view: RecyclerView, adapter: LectureAdapter) {
+        view.adapter = adapter
+    }
 
-
+    @JvmStatic
+    @BindingAdapter("submitList")
+    fun bindSubmitList(view: RecyclerView, response: Resource<LecturesResponse>?) {
+        when (response) {
+            is Resource.Success -> {
+                view.visibility = View.VISIBLE
+                (view.adapter as? LectureAdapter)?.submitList(response.data.items)
+            }
+            is Resource.Empty -> {
+                view.visibility = View.GONE
+                (view.adapter as? LectureAdapter)?.submitList(emptyList())
+            }
+            is Resource.Error -> {
+                view.visibility = View.GONE
+                Log.d("asdfasdfasdfasf",response.exception.message.toString())
+                view.context?.toast(response.exception.message.toString())
+            }
+        }
+    }
 }

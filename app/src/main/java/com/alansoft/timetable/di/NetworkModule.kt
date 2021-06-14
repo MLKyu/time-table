@@ -2,6 +2,7 @@ package com.alansoft.timetable.di
 
 import android.util.Log
 import com.alansoft.timetable.BuildConfig
+import com.alansoft.timetable.data.ListTypeAdapter
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -22,7 +23,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     const val BAST_HOST =
-        "https://k03c8j1o5a.execute-api.ap-northeast-2.amazonaws.com/v1/programmers/"
+        "https://k03c8j1o5a.execute-api.ap-northeast-2.amazonaws.com/"
 
     @Singleton
     @Provides
@@ -32,6 +33,7 @@ object NetworkModule {
                 chain.proceed(
                     chain.request().newBuilder()
                         .header("x-api-key", BuildConfig.ApiKey)
+                        .header("Content-Type", "application/json")
                         .build()
                 )
             }
@@ -53,6 +55,7 @@ object NetworkModule {
             .addConverterFactory(
                 GsonConverterFactory.create(
                     GsonBuilder()
+//                        .registerTypeAdapter(List::class.java, ListTypeAdapter())
                         .create()
                 )
             )

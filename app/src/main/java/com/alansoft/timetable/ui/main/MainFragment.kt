@@ -14,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     private val viewModel: MainViewModel by viewModels()
+    private var adapter = LectureAdapter(null)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,6 +22,10 @@ class MainFragment : Fragment() {
     ): View {
         val binding: MainFragmentBinding =
             DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.adapter = adapter
+        binding.viewModel = viewModel
+
         return binding.root
     }
 

@@ -1,8 +1,8 @@
 package com.alansoft.timetable.extension
 
+import android.content.Context
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 
 /**
  * Created by LEE MIN KYU on 2021/06/13
@@ -16,6 +16,6 @@ fun ImageView.loadWithThumbnail(uri: String?) {
 //        .into(this)
 }
 
-fun Fragment.toast(message: String) {
-    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+fun Context.toast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

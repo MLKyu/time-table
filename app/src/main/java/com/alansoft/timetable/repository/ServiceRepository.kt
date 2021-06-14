@@ -15,7 +15,9 @@ import javax.inject.Inject
  */
 class ServiceRepository @Inject constructor(private val remote: DataSource) {
     @WorkerThread
-    fun getLectures(): Flow<Resource<LecturesResponse>> = flow {
+    fun getLectures(
+        onLoading: (Boolean) -> Unit
+    ): Flow<Resource<LecturesResponse>> = flow {
         val response = remote.getLectures()
         if (response.items.isNullOrEmpty()) {
             emit(Resource.empty())
@@ -23,10 +25,12 @@ class ServiceRepository @Inject constructor(private val remote: DataSource) {
             emit(Resource.success(response))
         }
     }.onStart {
+        onLoading(true)
     }.retry(2) { cause ->
         cause is IOException
     }.catch { e ->
         emit(Resource.error(e))
     }.onCompletion {
+        onLoading(false)
     }.flowOn(Dispatchers.IO)
 }
