@@ -23,8 +23,8 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("adapter")
-    fun bindAdapter(view: RecyclerView, adapter: LectureAdapter) {
+    @BindingAdapter("lectureAdapter")
+    fun bindLectureAdapter(view: RecyclerView, adapter: LectureAdapter) {
         view.adapter = adapter
     }
 
@@ -34,7 +34,10 @@ object BindingAdapter {
         when (response) {
             is Resource.Success -> {
                 view.visibility = View.VISIBLE
-                (view.adapter as? LectureAdapter)?.submitList(response.data.items)
+                (view.adapter as? LectureAdapter)?.run {
+                    Log.d("asdfasdfasdfasf", "ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹ" + response.data.items)
+                    submitList(response.data.items)
+                }
             }
             is Resource.Empty -> {
                 view.visibility = View.GONE
@@ -42,7 +45,7 @@ object BindingAdapter {
             }
             is Resource.Error -> {
                 view.visibility = View.GONE
-                Log.d("asdfasdfasdfasf",response.exception.message.toString())
+                Log.d("asdfasdfasdfasf", response.exception.message.toString())
                 view.context?.toast(response.exception.message.toString())
             }
         }

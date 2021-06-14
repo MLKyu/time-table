@@ -1,5 +1,6 @@
 package com.alansoft.timetable.ui.main
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -25,9 +26,10 @@ class LectureAdapter(private val itemCallback: ((LecturesItem) -> Unit)?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
+        Log.d("asdfasdfasdfasf", "ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹ$item")
+
         holder.binding?.run {
             setVariable(BR.item, item)
-            executePendingBindings()
 
             root.setOnClickListener {
 //                val currentItem = getItem()
@@ -53,7 +55,7 @@ class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
 
 private class DiffCallback : DiffUtil.ItemCallback<LecturesItem>() {
     override fun areItemsTheSame(oldItem: LecturesItem, newItem: LecturesItem): Boolean {
-        return oldItem.code == newItem.code && oldItem.lecture == newItem.lecture
+        return oldItem.code == newItem.code
     }
 
     override fun areContentsTheSame(oldItem: LecturesItem, newItem: LecturesItem): Boolean {

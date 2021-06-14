@@ -36,9 +36,10 @@ data class LecturesItem(
     @SerializedName("start_time")
     val startTime: String?,
     @SerializedName("end_time")
-    val endTime: String?,
-    @SerializedName("dayofweek")
-    val dayOfWeek: DayOfWeek?
+    val endTime: String?
+//    ,
+//    @SerializedName("dayofweek")
+//    val dayOfWeek: DayOfWeek?
 )
 
 data class DayOfWeek(val dayOfWeek: List<String>)
