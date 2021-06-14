@@ -1,6 +1,5 @@
 package com.alansoft.timetable.ui.main
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -26,8 +25,6 @@ class LectureAdapter(private val itemCallback: ((LecturesItem) -> Unit)?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        Log.d("asdfasdfasdfasf", "ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹ$item")
-
         holder.binding?.run {
             setVariable(BR.item, item)
 
