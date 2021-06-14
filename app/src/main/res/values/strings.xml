@@ -9,4 +9,8 @@
         <item>Thu</item>
         <item>Fri</item>
     </string-array>
+
+    <string name="lecture_code">교과목 코드 : %s</string>
+    <string name="lecture_professor">담당 교 : %s</string>
+    <string name="lecture_location">강의실 : %s</string>
 </resources>

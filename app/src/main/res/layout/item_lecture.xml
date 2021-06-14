@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.alansoft.timetable.data.response.LecturesItem" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="3dp"
+        app:contentPadding="16dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/lecture"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{item.lecture}"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/dayOfWeek"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{item.startTime}"
+                app:layout_constraintLeft_toLeftOf="@+id/lecture"
+                app:layout_constraintRight_toRightOf="@+id/lecture"
+                app:layout_constraintTop_toBottomOf="@+id/lecture" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/code"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{item.code}"
+                app:layout_constraintLeft_toLeftOf="@+id/lecture"
+                app:layout_constraintRight_toRightOf="@+id/lecture"
+                app:layout_constraintTop_toBottomOf="@+id/dayOfWeek" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/professor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{item.professor}"
+                app:layout_constraintLeft_toLeftOf="@+id/lecture"
+                app:layout_constraintRight_toRightOf="@+id/lecture"
+                app:layout_constraintTop_toBottomOf="@+id/code" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/location"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="@{item.location}"
+                app:layout_constraintLeft_toLeftOf="@+id/lecture"
+                app:layout_constraintRight_toRightOf="@+id/lecture"
+                app:layout_constraintTop_toBottomOf="@+id/professor" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

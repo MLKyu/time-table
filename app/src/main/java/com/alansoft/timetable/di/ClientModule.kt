@@ -1,8 +1,12 @@
 package com.alansoft.timetable.di
 
+import com.alansoft.timetable.data.api.ServiceApi
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import javax.inject.Singleton
 
 /**
  * Created by LEE MIN KYU on 2021/06/11
@@ -11,9 +15,7 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 object ClientModule {
-
-//    @Singleton
-//    @Provides
-//    fun providePokeApi(retrofit: Retrofit): PokeApi = retrofit.create(PokeApi::class.java)
-
+    @Singleton
+    @Provides
+    fun provideServiceApi(retrofit: Retrofit): ServiceApi = retrofit.create(ServiceApi::class.java)
 }

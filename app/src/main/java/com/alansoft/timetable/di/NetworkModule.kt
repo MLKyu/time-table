@@ -1,6 +1,7 @@
 package com.alansoft.timetable.di
 
 import android.util.Log
+import com.alansoft.timetable.BuildConfig
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -30,7 +31,7 @@ object NetworkModule {
             .addInterceptor { chain: Interceptor.Chain ->
                 chain.proceed(
                     chain.request().newBuilder()
-//                        .header("x-api-key", BuildConfig.ApiKey)
+                        .header("x-api-key", BuildConfig.ApiKey)
                         .build()
                 )
             }
@@ -57,6 +58,4 @@ object NetworkModule {
             )
             .client(client)
             .build()
-
-
 }

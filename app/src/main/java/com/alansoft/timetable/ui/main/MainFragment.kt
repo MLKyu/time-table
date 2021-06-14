@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import com.alansoft.timetable.R
 import com.alansoft.timetable.databinding.MainFragmentBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
@@ -53,8 +52,7 @@ class MainFragment : Fragment() {
 
             // 검색 버튼 누르면 대박
             setOnSearchClickListener {
-
-
+                viewModel.loadLecture()
             }
 
             setOnCloseListener {
