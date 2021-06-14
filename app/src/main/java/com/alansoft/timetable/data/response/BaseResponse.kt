@@ -16,3 +16,5 @@ open class BaseResponse<T> {
     @SerializedName("ScannedCount")
     var scannedCount: Long = -1
 }
+
+data class MsgResponse(val message: String)

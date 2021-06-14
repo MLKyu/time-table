@@ -1,6 +1,8 @@
 package com.alansoft.timetable.data.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by LEE MIN KYU on 2021/06/13
@@ -28,6 +30,7 @@ import com.google.gson.annotations.SerializedName
  */
 class LecturesResponse : BaseResponse<LecturesItem>()
 
+@Parcelize
 data class LecturesItem(
     val code: String?,
     val lecture: String?,
@@ -39,4 +42,4 @@ data class LecturesItem(
     val endTime: String?,
     @SerializedName("dayofweek")
     val dayOfWeek: List<String>?
-)
+) : Parcelable

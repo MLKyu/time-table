@@ -1,6 +1,5 @@
 package com.alansoft.timetable.ba
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -10,6 +9,8 @@ import com.alansoft.timetable.data.response.LecturesResponse
 import com.alansoft.timetable.extension.loadWithThumbnail
 import com.alansoft.timetable.extension.toast
 import com.alansoft.timetable.ui.main.LectureAdapter
+import com.alansoft.timetableview.Schedule
+import com.alansoft.timetableview.TimetableView
 
 /**
  * Created by LEE MIN KYU on 2021/06/13
@@ -35,7 +36,6 @@ object BindingAdapter {
             is Resource.Success -> {
                 view.visibility = View.VISIBLE
                 (view.adapter as? LectureAdapter)?.run {
-                    Log.d("asdfasdfasdfasf", "ㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹ" + response.data.items)
                     submitList(response.data.items)
                 }
             }
@@ -45,7 +45,22 @@ object BindingAdapter {
             }
             is Resource.Error -> {
                 view.visibility = View.GONE
-                Log.d("asdfasdfasdfasf", response.exception.message.toString())
+                view.context?.toast(response.exception.message.toString())
+            }
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("timeTable")
+    fun bindTimeTable(view: TimetableView, response: Resource<List<Schedule>>?) {
+        when (response) {
+            is Resource.Success -> {
+                view.add(response.data)
+            }
+            is Resource.Empty -> {
+                view.context?.toast("response.exception.message.toString()")
+            }
+            is Resource.Error -> {
                 view.context?.toast(response.exception.message.toString())
             }
         }

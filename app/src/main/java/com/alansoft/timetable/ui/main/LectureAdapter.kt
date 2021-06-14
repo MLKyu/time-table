@@ -29,12 +29,10 @@ class LectureAdapter(private val itemCallback: ((LecturesItem) -> Unit)?) :
             setVariable(BR.item, item)
 
             root.setOnClickListener {
-//                val currentItem = getItem()
-//                currentItem?.let {
-//                    it.like = !it.like
-//                    userLike.isSelected = it.like
-//                    itemCallback?.invoke(it)
-//                }
+                val currentItem = getItem()
+                currentItem?.let {
+                    itemCallback?.invoke(it)
+                }
             }
         }
     }

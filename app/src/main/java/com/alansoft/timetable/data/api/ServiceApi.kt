@@ -4,6 +4,7 @@ import com.alansoft.timetable.data.request.MemoRequest
 import com.alansoft.timetable.data.request.TimeTableRequest
 import com.alansoft.timetable.data.response.LecturesResponse
 import com.alansoft.timetable.data.response.MemoResponse
+import com.alansoft.timetable.data.response.MsgResponse
 import com.alansoft.timetable.data.response.TimeTableResponse
 import retrofit2.http.*
 
@@ -31,11 +32,11 @@ interface ServiceApi {
 
     //    POST /timetable -> 사용자가 새로운 강의 코드를 추가합니다.
     @POST("/v1/programmers/timetable")
-    suspend fun insertTimetable(@Body request: TimeTableRequest)
+    suspend fun insertTimetable(@Body request: TimeTableRequest): MsgResponse
 
     //    DELETE /timetable -> 사용자의 추가된 강의 코드를 삭제합니다.
     @DELETE("/v1/programmers/timetable")
-    suspend fun deleteTximetable(@Body request: TimeTableRequest)
+    suspend fun deleteTximetable(@Body request: TimeTableRequest): MsgResponse
 
     //    GET /memo?user_key={사용자 ID 토큰} -> 작성한 모든 메모를 조회할 수 있습니다.
     @GET("/v1/programmers/memo")

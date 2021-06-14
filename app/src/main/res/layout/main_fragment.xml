@@ -24,12 +24,12 @@
         <com.alansoft.timetableview.TimetableView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:header_highlight_type="color"
             app:header_title="@array/header_title"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:timeTable="@{viewModel.timeTableResult}" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
