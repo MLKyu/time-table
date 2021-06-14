@@ -13,6 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
+    lateinit var binding: MainFragmentBinding
     private val viewModel: MainViewModel by viewModels()
     private var adapter = LectureAdapter(null)
 
@@ -20,13 +21,19 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: MainFragmentBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.adapter = adapter
         binding.viewModel = viewModel
 
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        Log.d("asdfasdf", item.toString())
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -37,6 +44,10 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setHasOptionsMenu(true)
+    }
+
+    private fun hideList() {
+        binding.recyclerView.visibility = View.GONE
     }
 
     private fun setSearchMenu(menu: Menu) {
